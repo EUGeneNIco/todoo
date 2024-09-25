@@ -1,11 +1,11 @@
 <div nz-flex [nzVertical]="isVertical">
-    <div class="flex-item">
+    <div class="flex-item" *ngFor="let stage of stages">
         <div class="content">
-            <h3>To Do</h3>
-            <nz-card class="card-body">
-                <nz-tag nzColor="success">High</nz-tag>
-                <p class="title">Task Title</p>
-                <p class="description">Some description...</p>
+            <p class="board-title">{{stage.name}}</p>
+            <nz-card class="card-body" *ngFor="let ticket of getTicketsForTheStage(stage.value)">
+                <nz-tag [nzColor]="getPriorityColor(ticket.priority)">{{ticket.priority}}</nz-tag>
+                <p class="title">{{ticket.title}}</p>
+                <p class="description">{{ticket.description}}</p>
             </nz-card>
         </div>
     </div>

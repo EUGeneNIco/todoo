@@ -17,12 +17,20 @@
   gap: 2rem;
   background-color: rgb(212, 225, 233);
   border-radius: 10px;
+
+  .board-title {
+    font-size: x-large;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  border-radius: 10px;
 
   .title {
     font-weight: bold;
