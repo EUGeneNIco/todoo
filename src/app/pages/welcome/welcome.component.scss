@@ -1,0 +1,31 @@
+.flex-item {
+  height: 100%;
+  padding: 10px;
+  inline-size: 33%;
+  block-size: 54px;
+  //   background-color: var(--ant-primary-6);
+  //   background-color: red;
+
+  //   border: solid rgb(148, 42, 42) 1px;
+}
+
+.content {
+  height: max-content;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: rgb(212, 225, 233);
+  border-radius: 10px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .title {
+    font-weight: bold;
+    font-size: large;
+  }
+}

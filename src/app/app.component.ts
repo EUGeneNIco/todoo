@@ -5,6 +5,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -13,7 +14,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
     RouterOutlet,
     NzIconModule,
     NzLayoutModule,
-    NzMenuModule
+    NzMenuModule,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
