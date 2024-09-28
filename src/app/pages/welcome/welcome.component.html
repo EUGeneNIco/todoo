@@ -1,9 +1,23 @@
 <div nz-flex [nzVertical]="isVertical">
     <div class="flex-item" *ngFor="let stage of stages">
         <div class="content">
-            <p class="board-title">{{stage.name}}</p>
+            <span>
+                <p class="board-title">{{stage.name}}</p>
+                <p class="count">{{getNoOfTickets(stage.value)}}</p>
+            </span>
             <nz-card class="card-body" *ngFor="let ticket of getTicketsForTheStage(stage.value)">
-                <nz-tag [nzColor]="getPriorityColor(ticket.priority)">{{ticket.priority}}</nz-tag>
+                <div class="action">
+                    <nz-tag [nzColor]="getPriorityColor(ticket.priority)">{{ticket.priority}}</nz-tag>
+                    <a nz-dropdown [nzDropdownMenu]="menu">
+                        <span nz-icon nzType="menu" nzTheme="outline"></span>
+                    </a>
+                    <nz-dropdown-menu #menu="nzDropdownMenu">
+                        <ul nz-menu nzSelectable>
+                            <li nz-menu-item *ngFor="let status of getAvailableStatuses(ticket.stage)"
+                                (click)="onChangeStatus(status.value, ticket.id)">{{status.name}}</li>
+                        </ul>
+                    </nz-dropdown-menu>
+                </div>
                 <p class="title">{{ticket.title}}</p>
                 <p class="description">{{ticket.description}}</p>
             </nz-card>
