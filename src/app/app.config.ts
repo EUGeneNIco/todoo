@@ -7,11 +7,27 @@ import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
+import { provideSpinnerConfig } from 'ngx-spinner';
+import { provideToastr } from 'ngx-toastr';
 
 registerLocaleData(en);
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideNzIcons(), provideNzI18n(en_US), importProvidersFrom(FormsModule), provideAnimationsAsync(), provideHttpClient()]
+  providers: [
+    provideRouter(routes),
+    provideNzIcons(),
+    provideNzI18n(en_US),
+    importProvidersFrom(FormsModule),
+    provideAnimations(),
+    provideHttpClient(),
+    provideSpinnerConfig({ type: 'ball-pulse' }),
+    provideToastr({
+      timeOut: 2500,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      closeButton: true,
+    })
+  ]
 };

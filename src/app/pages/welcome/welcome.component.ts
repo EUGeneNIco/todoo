@@ -7,7 +7,9 @@ import { CommonModule } from '@angular/common';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { tickets } from '../../data/tickets';
-import { Stages } from '../../models/Stages';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { Stages } from '../../models/stages';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-welcome',
@@ -28,7 +30,10 @@ export class WelcomeComponent implements OnInit {
   stages = Stages;
   tickets = signal<Ticket[]>(tickets);
 
-  constructor() { }
+  constructor(
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
   }
@@ -59,13 +64,20 @@ export class WelcomeComponent implements OnInit {
   }
 
   onChangeStatus(statusId: number, ticketId: number) {
-    let ticket = this.tickets().find(x => x.id === ticketId);
-    const status = this.stages.find(x => x.value === statusId);
+    this.spinner.show();
 
-    ticket.stage = status.value;
+    setTimeout(() => {
+      let ticket = this.tickets().find(x => x.id === ticketId);
+      const status = this.stages.find(x => x.value === statusId);
 
-    this.tickets.update(values => {
-      return [...values.filter(x => x.id !== ticket.id), ticket];
-    });
+      ticket.stage = status.value;
+
+      this.tickets.update(values => {
+        return [...values.filter(x => x.id !== ticket.id), ticket];
+      });
+
+      this.spinner.hide();
+      this.toastr.success('Ticket status has changed successfully.');
+    }, 1000);
   }
 }
