@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTagModule } from 'ng-zorro-antd/tag';
@@ -12,7 +12,7 @@ import { Stages } from '../../models/stages';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-welcome',
+  selector: 'app-kanban',
   standalone: true,
   imports: [
     NzFlexModule,
@@ -22,21 +22,15 @@ import { ToastrService } from 'ngx-toastr';
     NzDropDownModule,
     NzIconModule
   ],
-  templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.scss']
+  templateUrl: './kanban.component.html',
+  styleUrls: ['./kanban.component.scss']
 })
-export class WelcomeComponent implements OnInit {
+export class KanbanComponent {
+  private readonly spinner = inject(NgxSpinnerService);
+  private readonly toastr = inject(ToastrService);
   isVertical = false;
   stages = Stages;
   tickets = signal<Ticket[]>(tickets);
-
-  constructor(
-    private spinner: NgxSpinnerService,
-    private toastr: ToastrService
-  ) { }
-
-  ngOnInit() {
-  }
 
   getTicketsForTheStage(stageNo: number) {
     return this.tickets().filter(t => t.stage === stageNo);
@@ -78,6 +72,6 @@ export class WelcomeComponent implements OnInit {
 
       this.spinner.hide();
       this.toastr.success('Ticket status has changed successfully.');
-    }, 1000);
+    }, 500);
   }
 }

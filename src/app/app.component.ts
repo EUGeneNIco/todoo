@@ -7,7 +7,6 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
